@@ -1,16 +1,27 @@
 <script setup lang="ts">
-import {computed} from "vue";
+import {computed, onMounted, watch} from "vue";
 import {storeToRefs} from "pinia";
-import type {Condition} from "../types/weather";
+import type {Condition, Weather} from "../types/weather";
 import {useStore} from "../store.ts";
+import {fetchCurrentWeather} from "../functions/weather.ts";
 
 const store = useStore();
 
-const { weather } = storeToRefs(store);
+const { city, weather } = storeToRefs(store);
 
 const description = computed(() => {
   return weather.value?.conditions.map((c: Condition) => c.main).join(', ');
 });
+
+const load = () => {
+  fetchCurrentWeather(city.value!).then((response: Weather) => {
+    weather.value = response;
+  });
+}
+
+onMounted(() => load());
+
+watch(city, () => load());
 </script>
 
 <template>

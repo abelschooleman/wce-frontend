@@ -13,7 +13,8 @@
     "@sidekickicons/vue": "^0.13.0",
     "axios": "^1.9.0",
     "pinia": "^3.0.3",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue3-google-map": "^0.22.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.10",

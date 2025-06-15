@@ -3,7 +3,7 @@ import type {City} from "../types/global";
 import type {Image} from "../types/images";
 
 const fetchImages = async (city: City): Promise<Image[]> => {
-    const response = await axios.get(`images?city=${city}`);
+    const response = await axios.get(`images?city=${city.name}`);
 
     if (response.status !== 200) {
         throw new Error("Failed to fetch images from API");

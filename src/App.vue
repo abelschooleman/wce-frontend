@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import axios from "axios";
-import CurrentWeather from "./components/CurrentWeather.vue";
-import SearchInput from "./components/SearchInput.vue";
-import ImageGrid from "./components/ImageGrid.vue";
+import SearchCity from "./components/SearchCity.vue";
+import CityDetails from "./components/CityDetails.vue";
 
 axios.defaults.baseURL = "http://localhost/api";
 </script>
 
 <template>
-  <SearchInput></SearchInput>
-  <CurrentWeather></CurrentWeather>
-  <ImageGrid></ImageGrid>
+  <SearchCity></SearchCity>
+  <CityDetails></CityDetails>
 </template>

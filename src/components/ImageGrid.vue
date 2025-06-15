@@ -1,10 +1,23 @@
 <script setup lang="ts">
 import {storeToRefs} from "pinia";
 import {useStore} from "../store.ts";
+import {fetchImages} from "../functions/images.ts";
+import type {Image} from "../types/images";
+import {onMounted, watch} from "vue";
 
 const store = useStore();
 
-const { images } = storeToRefs(store);
+const { city, images } = storeToRefs(store);
+
+const load = () => {
+  fetchImages(city.value!).then((response: Image[]) => {
+    images.value = response;
+  });
+}
+
+onMounted(() => load());
+
+watch(city, () => load());
 </script>
 
 <template>
