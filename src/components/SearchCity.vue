@@ -1,37 +1,41 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, type Ref, ref} from "vue";
 import {storeToRefs} from "pinia";
 import {MagnifyingGlassIcon, MapPinIcon} from "@heroicons/vue/24/outline";
-import {fetchCurrentWeather} from "../functions/weather.ts";
-import type {Weather} from "../types/weather";
 import {useStore} from "../store.ts";
-import {fetchImages} from "../functions/images.ts";
-import type {Image} from "../types/images";
+import {findCitiesByName} from "../functions/geocode.ts";
+import type {City} from "../types/global";
 
 const store = useStore();
 
-const { images, weather } = storeToRefs(store);
+const { city: selectedCity } = storeToRefs(store);
 
 const query = ref("");
+const result: Ref<City[]> = ref([]);
 
 const isDisabled = computed(() => {
   return query.value?.length === 0;
 });
 
-const onSubmit = () => {
-  fetchCurrentWeather(query.value)
-      .then((response: Weather) => {
-        weather.value = response;
-      });
+const onReset = () => {
+  query.value = "";
+  result.value = [];
+}
 
-  fetchImages(query.value).then((response: Image[]) => {
-    images.value = response;
+const onSelect = (city: City) => {
+  result.value = [];
+  selectedCity.value = city;
+}
+
+const onSubmit = () => {
+  findCitiesByName(query.value).then((response: City[]) => {
+    result.value = response
   });
 };
 </script>
 
 <template>
-  <div>
+  <div class="relative">
     <label for="query" class="block text-sm/6 font-medium text-gray-900">Search city</label>
     <div class="mt-2 flex">
       <div class="-mr-px grid grow grid-cols-1 focus-within:relative">
@@ -43,6 +47,7 @@ const onSubmit = () => {
           placeholder="Wateringen"
           v-model="query"
           @keyup.enter="onSubmit"
+          @keyup.esc="onReset"
         />
         <MapPinIcon class="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-400 sm:size-4" aria-hidden="true" />
       </div>
@@ -59,6 +64,23 @@ const onSubmit = () => {
         <MagnifyingGlassIcon class="-ml-0.5 size-4 text-gray-400" aria-hidden="true" />
         Go
       </button>
+    </div>
+
+    <div v-if="result.length > 0" class="absolute divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-md">
+      <div class="px-4 py-2 sm:px-6">
+        Select city from these options
+      </div>
+      <div class="px-4 py-5 sm:p-6">
+        <ul>
+          <li
+              v-for="(option, idx) in result"
+              :key="idx"
+              @click="onSelect(option)"
+          >
+            {{ option.name }}, {{ option.country }} ({{ option.state }})
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@ import type {City} from "../types/global";
 import type {Weather} from "../types/weather";
 
 const fetchCurrentWeather = async (city: City): Promise<Weather> => {
-    const response = await axios.get(`weather?city=${city}`);
+    const response = await axios.get(`weather?name=${city.name}&country=${city.country}&state=${city.state}&latitude=${city.coordinates.latitude}&longitude=${city.coordinates.longitude}`);
 
     if (response.status !== 200) {
         throw new Error("Failed to fetch current weather from API");
