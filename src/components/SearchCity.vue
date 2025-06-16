@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import {computed, type Ref, ref} from "vue";
-import {storeToRefs} from "pinia";
-import {MagnifyingGlassIcon, MapPinIcon} from "@heroicons/vue/24/outline";
-import {useStore} from "../store.ts";
-import {findCitiesByName} from "../functions/geocode.ts";
-import type {City} from "../types/global";
+import { computed, type Ref, ref } from "vue";
+import { storeToRefs } from "pinia";
+import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/vue/24/outline";
+import { useStore } from "../store.ts";
+import { findCitiesByName } from "../functions/geocode.ts";
+import type { City } from "../types/global";
 
 const store = useStore();
 
@@ -36,7 +36,7 @@ const onSubmit = () => {
 
 <template>
   <div class="relative">
-    <label for="query" class="block text-sm/6 font-medium text-gray-900">Search city</label>
+    <label for="query" class="block text-sm/6 font-medium text-gray-900">Search for a city</label>
     <div class="mt-2 flex">
       <div class="-mr-px grid grow grid-cols-1 focus-within:relative">
         <input
@@ -44,7 +44,7 @@ const onSubmit = () => {
           name="query"
           id="query"
           class="col-start-1 row-start-1 block w-full rounded-l-md bg-white py-1.5 pr-3 pl-10 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:pl-9 sm:text-sm/6"
-          placeholder="Wateringen"
+          placeholder="Anywhere"
           v-model="query"
           @keyup.enter="onSubmit"
           @keyup.esc="onReset"
@@ -84,7 +84,3 @@ const onSubmit = () => {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

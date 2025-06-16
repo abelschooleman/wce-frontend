@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {computed, onMounted, watch} from "vue";
-import {storeToRefs} from "pinia";
-import type {Condition, Weather} from "../types/weather";
-import {useStore} from "../store.ts";
-import {fetchCurrentWeather} from "../functions/weather.ts";
+import { computed, onMounted, watch } from "vue";
+import { storeToRefs } from "pinia";
+import type { Condition, Weather } from "../types/weather";
+import { useStore } from "../store.ts";
+import { fetchCurrentWeather } from "../functions/weather.ts";
 
 const store = useStore();
 

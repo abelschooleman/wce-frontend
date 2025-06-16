@@ -1,6 +1,6 @@
 import axios from "axios";
-import type {City} from "../types/global";
-import type {Image} from "../types/images";
+import type { City } from "../types/global";
+import type { Image } from "../types/images";
 
 const fetchImages = async (city: City): Promise<Image[]> => {
     const response = await axios.get(`images?city=${city.name}`);

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {computed, onMounted, type Ref, ref} from "vue";
-import {storeToRefs} from "pinia";
+import { computed, onMounted, type Ref, ref } from "vue";
+import { storeToRefs } from "pinia";
 import { GoogleMap, Marker } from 'vue3-google-map'
-import {useStore} from "../store.ts";
-import {fetchAccessToken} from "../functions/geocode.ts";
+import { useStore } from "../store.ts";
+import { fetchAccessToken } from "../functions/geocode.ts";
 
 const store = useStore();
 

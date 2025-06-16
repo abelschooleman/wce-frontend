@@ -1,5 +1,5 @@
 import axios from "axios";
-import type {City} from "../types/global";
+import type { City } from "../types/global";
 
 const fetchAccessToken = async (): Promise<string> => {
     const response = await axios.get("access-token");
