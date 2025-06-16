@@ -1,5 +1,6 @@
 type Condition = {
     description: string;
+    icon: string;
     main: string;
 }
 

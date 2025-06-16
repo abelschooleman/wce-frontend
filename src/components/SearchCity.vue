@@ -23,8 +23,8 @@ const onReset = () => {
 }
 
 const onSelect = (city: City) => {
-  result.value = [];
   selectedCity.value = city;
+  onReset();
 }
 
 const onSubmit = () => {
