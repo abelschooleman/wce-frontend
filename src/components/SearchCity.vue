@@ -8,7 +8,7 @@ import type { City } from "../types/global";
 
 const store = useStore();
 
-const { city: selectedCity } = storeToRefs(store);
+const { city: selectedCity, images } = storeToRefs(store);
 
 const query = ref("");
 const result: Ref<City[]> = ref([]);
@@ -33,6 +33,7 @@ const onReset = () => {
 }
 
 const onSelect = (city: City) => {
+  images.value = [];
   selectedCity.value = city;
   onReset();
 }

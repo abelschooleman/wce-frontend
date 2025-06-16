@@ -10,14 +10,14 @@ const store = useStore();
 const { city, weather } = storeToRefs(store);
 
 const main = computed(() => {
-  return weather.value!.conditions.map((c: Condition) => c.main).join(', ');
+  return weather.value?.conditions.map((c: Condition) => c.main).join(', ');
 });
 
 const description = computed(() => {
-  return weather.value!.conditions.map((c: Condition) => c.description).join(', ');
+  return weather.value?.conditions.map((c: Condition) => c.description).join(', ');
 });
 
-const icons = computed(() => weather.value!.conditions.map((c: Condition) => c.icon));
+const icons = computed(() => weather.value?.conditions.map((c: Condition) => c.icon));
 
 const load = () => {
   fetchCurrentWeather(city.value!).then((response: Weather) => {
