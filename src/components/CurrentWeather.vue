@@ -34,10 +34,10 @@ watch(city, () => load());
   <div class="flex flex-col space-y-5 py-6">
     <div class="flex flex-row items-center">
       <img
-          v-for="(icon, idx) in icons"
-          :key="idx"
-          :src="icon"
-          :alt="icon"/>
+        v-for="(icon, idx) in icons"
+        :key="idx"
+        :src="icon"
+        :alt="icon"/>
       <h2>{{ main }}</h2>
     </div>
     <dl v-if="weather" class="mx-auto grid grid-cols-1 gap-px bg-gray-900/5 sm:grid-cols-2 lg:grid-cols-3">

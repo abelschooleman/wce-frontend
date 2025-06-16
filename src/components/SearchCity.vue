@@ -17,6 +17,16 @@ const isDisabled = computed(() => {
   return query.value?.length === 0;
 });
 
+const getCityOption = (city: City) => {
+  let option = `${city.name}, ${city.country}`;
+
+  if (city.state !== null) {
+    option += ` (${city.state})`;
+  }
+
+  return option;
+};
+
 const onReset = () => {
   query.value = "";
   result.value = [];
@@ -66,18 +76,18 @@ const onSubmit = () => {
       </button>
     </div>
 
-    <div v-if="result.length > 0" class="absolute divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow-md">
-      <div class="px-4 py-2 sm:px-6">
-        Select city from these options
-      </div>
-      <div class="px-4 py-5 sm:p-6">
+    <div
+      v-if="result.length > 0"
+      class="absolute ml-3 -mt-0.5 overflow-hidden rounded-b-lg bg-white shadow-md"
+    >
+      <div class="px-4 py-3 sm:p-6">
         <ul>
           <li
               v-for="(option, idx) in result"
               :key="idx"
               @click="onSelect(option)"
           >
-            {{ option.name }}, {{ option.country }} ({{ option.state }})
+            {{ getCityOption(option) }}
           </li>
         </ul>
       </div>

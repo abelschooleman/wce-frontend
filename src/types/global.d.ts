@@ -12,7 +12,7 @@ type Coordinates = {
 type City = {
     name: CityName;
     country: Country;
-    state: State;
+    state: State | null;
     coordinates: Coordinates;
 };
 
